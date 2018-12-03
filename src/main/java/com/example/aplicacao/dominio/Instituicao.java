@@ -12,13 +12,13 @@ public class Instituicao extends Pessoa{
 		this.cnpj = cnpj;
 	}
 
-	public Instituicao(String nome, String telefone, Endereco endereco, String cnpj) {
-		super(nome, telefone, endereco);
+	public Instituicao(String nome, String telefone, Endereco endereco, String cnpj, Integer id) {
+		super(nome, telefone, endereco,id);
 		this.cnpj = cnpj;
 	}
 
-	public Instituicao(String nome, String telefone, Endereco endereco) {
-		super(nome, telefone, endereco);
+	public Instituicao(String nome, String telefone, Endereco endereco, Integer id) {
+		super(nome, telefone, endereco, id);
 	}
 	
 	

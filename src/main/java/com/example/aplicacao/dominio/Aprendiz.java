@@ -1,12 +1,11 @@
 package com.example.aplicacao.dominio;
 
-import java.io.Serializable;
+
 import java.time.LocalDate;
 
 public class Aprendiz extends Pessoa {
-	
 
-	private Integer id;
+	private static final long serialVersionUID = 1L;
 	private String cpf;
 	private LocalDate dataNascimento;
 	
@@ -60,8 +59,8 @@ public class Aprendiz extends Pessoa {
 		this.empresaQuali = empresaQuali;
 	}
 	public Aprendiz(String nome, String telefone, Endereco endereco, String cpf, LocalDate dataNascimento,
-			String cpfResp, String telefoneResp, Instituicao trabalho, Instituicao escola, Instituicao empresaQuali) {
-		super(nome, telefone, endereco);
+			String cpfResp, String telefoneResp, Instituicao trabalho, Instituicao escola, Instituicao empresaQuali, Integer id) {
+		super(nome, telefone, endereco, id);
 		this.cpf = cpf;
 		this.dataNascimento = dataNascimento;
 		this.cpfResp = cpfResp;

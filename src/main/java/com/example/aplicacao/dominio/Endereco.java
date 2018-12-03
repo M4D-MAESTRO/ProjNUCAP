@@ -46,16 +46,22 @@ public class Endereco {
 	public void setEstado(String estado) {
 		this.estado = estado;
 	}
-	public Endereco(String endereco, String complemento, String bairro, String cidade, String estado) {
+	public Endereco(String endereco, String complemento, String bairro, String cidade, String estado, Integer id) {
 		super();
 		this.endereco = endereco;
 		this.complemento = complemento;
 		this.bairro = bairro;
 		this.cidade = cidade;
 		this.estado = estado;
+		this.id = id;
 	}
 	public Endereco() {
 		super();
+	}
+	@Override
+	public String toString() {
+		return "Endereco [id=" + id + ", endereco=" + endereco + ", complemento=" + complemento + ", bairro=" + bairro
+				+ ", cidade=" + cidade + ", estado=" + estado + "]";
 	}
 
 	
