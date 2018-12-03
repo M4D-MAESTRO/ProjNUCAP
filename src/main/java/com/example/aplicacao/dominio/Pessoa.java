@@ -1,4 +1,4 @@
-package com.example.dominio;
+package com.example.aplicacao.dominio;
 
 
 public abstract class Pessoa {
