@@ -1,15 +1,19 @@
 package com.example.aplicacao.dominio;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
-public class Aprendiz extends Pessoa{
+public class Aprendiz extends Pessoa {
 	
+
+	private Integer id;
 	private String cpf;
 	private LocalDate dataNascimento;
 	
 	private String cpfResp;
 	private String telefoneResp;
 	
+
 	private Instituicao trabalho;
 	private Instituicao escola;
 	private Instituicao empresaQuali;

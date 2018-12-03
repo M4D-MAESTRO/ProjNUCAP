@@ -1,10 +1,20 @@
 package com.example.aplicacao.dominio;
 
+import java.io.Serializable;
 
-public abstract class Pessoa {
+import javax.persistence.*;
+
+@Entity
+public class Pessoa implements Serializable{
+
+	private static final long serialVersionUID = 1L;
 	
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Integer id;
 	private String nome;
 	private String telefone;
+	@OneToOne
 	private Endereco endereco;
 	public String getNome() {
 		return nome;
