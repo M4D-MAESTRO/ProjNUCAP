@@ -9,7 +9,7 @@ import javax.persistence.Id;
 public class Endereco {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String endereco;
 	private String complemento;
