@@ -5,6 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.*;
 
+import com.example.aplicacao.dominio.Aprendiz;
 import com.example.aplicacao.dominio.Endereco;
 import com.example.aplicacao.dominio.Pessoa;
 
@@ -13,11 +14,11 @@ import com.example.aplicacao.dominio.Pessoa;
 public class Relatorio {
 	
 	@Autowired
-	private PessoaService servico;
+	private AprendizService servico;
 	
 	@RequestMapping(value="/{id}", method=RequestMethod.GET)
 	public ResponseEntity<?> find(@PathVariable Integer id) {
-		Pessoa obj = servico.buscar(id);
+		Aprendiz obj = servico.buscar(id);
 		
 		return ResponseEntity.ok().body(obj);
 	}

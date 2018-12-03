@@ -11,7 +11,7 @@ import com.example.aplicacao.repositories.AprendizRepository;
 import com.example.aplicacao.repositories.PessoaRepository;
 
 @Service
-public class PessoaService {
+public class AprendizService {
 	
 	@Autowired
 	private AprendizRepository repo;

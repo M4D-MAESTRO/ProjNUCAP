@@ -12,7 +12,9 @@ import org.springframework.context.annotation.ComponentScan;
 
 import com.example.aplicacao.dominio.Aprendiz;
 import com.example.aplicacao.dominio.Endereco;
+import com.example.aplicacao.dominio.Instituicao;
 import com.example.aplicacao.dominio.Pessoa;
+import com.example.aplicacao.repositories.AprendizRepository;
 import com.example.aplicacao.repositories.PessoaRepository;
 
 
@@ -21,7 +23,7 @@ import com.example.aplicacao.repositories.PessoaRepository;
 public class ProjNucapApplication implements CommandLineRunner{
 	
 	@Autowired
-	private PessoaRepository pessoaRep;
+	private AprendizRepository pessoaRep;
 
 	public static void main(String[] args) {
 		SpringApplication.run(ProjNucapApplication.class, args);
@@ -31,7 +33,9 @@ public class ProjNucapApplication implements CommandLineRunner{
 	public void run(String... args) throws Exception {
 		LocalDate data = LocalDate.of(1993, 12, 21);
 		Endereco end1 = new Endereco("Rua Francisco Paulo, 01", "Fundos", "Mascarenhas", "Rio de Janeiro", "RJ", null);
-		Aprendiz apr1 = new Aprendiz("Pedro Augusto de Assis", "(21) 9533-33331", end1, "041.251.478-56", data, "011.225.445-55", "(21) 9999-99999", null, null, null, null);
+		Endereco end2 = new Endereco("Rua Hermínio, 6.009", null, null, "Rio das Ostras", "RJ", null);
+		Instituicao escola = new Instituicao("Centro Educacional Futuro Certo", "21 988554525",end2 , "25.561.654/6321-68", null);
+		Aprendiz apr1 = new Aprendiz("Pedro Augusto de Assis", "(21) 9533-33331", end1, "041.251.478-56", data, "011.225.445-55", "(21) 9999-99999", null, escola, null, null);
 		
 		pessoaRep.saveAll(Arrays.asList(apr1));
 	}

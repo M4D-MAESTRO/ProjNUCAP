@@ -14,7 +14,7 @@ public class Pessoa implements Serializable{
 	private Integer id;
 	private String nome;
 	private String telefone;
-	@OneToOne
+	@OneToOne(cascade = {CascadeType.ALL})
 	private Endereco endereco;
 	public String getNome() {
 		return nome;

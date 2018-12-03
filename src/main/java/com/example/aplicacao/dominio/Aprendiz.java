@@ -3,6 +3,11 @@ package com.example.aplicacao.dominio;
 
 import java.time.LocalDate;
 
+import javax.persistence.*;
+
+@Entity
+@PrimaryKeyJoinColumn(name="id")
+@Inheritance(strategy=InheritanceType.JOINED)
 public class Aprendiz extends Pessoa {
 
 	private static final long serialVersionUID = 1L;
@@ -12,10 +17,13 @@ public class Aprendiz extends Pessoa {
 	private String cpfResp;
 	private String telefoneResp;
 	
-
+	@OneToOne(cascade = {CascadeType.ALL})
 	private Instituicao trabalho;
+	@OneToOne(cascade = {CascadeType.ALL})
 	private Instituicao escola;
+	@OneToOne(cascade = {CascadeType.ALL})
 	private Instituicao empresaQuali;
+	
 	public String getCpf() {
 		return cpf;
 	}
@@ -69,9 +77,12 @@ public class Aprendiz extends Pessoa {
 		this.escola = escola;
 		this.empresaQuali = empresaQuali;
 	}
-	
-	
-	
-	
+	public Aprendiz(String nome, String telefone, Endereco endereco, Integer id) {
+		super(nome, telefone, endereco, id);
+	}
+
+	public Aprendiz() {
+		
+	}
 
 }

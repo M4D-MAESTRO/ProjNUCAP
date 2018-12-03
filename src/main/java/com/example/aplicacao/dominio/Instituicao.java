@@ -1,5 +1,8 @@
 package com.example.aplicacao.dominio;
 
+import javax.persistence.Entity;
+
+@Entity
 public class Instituicao extends Pessoa{
 	
 	private String cnpj;
@@ -21,6 +24,8 @@ public class Instituicao extends Pessoa{
 		super(nome, telefone, endereco, id);
 	}
 	
-	
+	public Instituicao() {
+		
+	}
 
 }
