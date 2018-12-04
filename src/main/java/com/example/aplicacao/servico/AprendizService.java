@@ -16,7 +16,7 @@ public class AprendizService {
 	@Autowired
 	private AprendizRepository repo;
 	
-	public Aprendiz buscar(Integer id) {
+	public Aprendiz find(Integer id) {
 		Optional<Aprendiz> obj = repo.findById(id);
 		return obj.orElse(null);
 	}
@@ -24,5 +24,14 @@ public class AprendizService {
 	
 	public Aprendiz insert(Aprendiz obj) {
 		return repo.save(obj);
+	}
+	
+	public Aprendiz update(Aprendiz obj) {
+		find(obj.getId());
+		return repo.save(obj);
+	}
+	
+	public void delete(Integer id) {
+		
 	}
 }
