@@ -21,4 +21,8 @@ public class AprendizService {
 		return obj.orElse(null);
 	}
 
+	
+	public Aprendiz insert(Aprendiz obj) {
+		return repo.save(obj);
+	}
 }

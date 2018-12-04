@@ -35,8 +35,10 @@ public class ProjNucapApplication implements CommandLineRunner{
 		Endereco end1 = new Endereco("Rua Francisco Paulo, 01", "Fundos", "Mascarenhas", "Rio de Janeiro", "RJ", null);
 		Endereco end2 = new Endereco("Rua Hermínio, 6.009", null, null, "Rio das Ostras", "RJ", null);
 		Instituicao escola = new Instituicao("Centro Educacional Futuro Certo", "21 988554525",end2 , "25.561.654/6321-68", null);
-		Aprendiz apr1 = new Aprendiz("Pedro Augusto de Assis", "(21) 9533-33331", end1, "041.251.478-56", data, "011.225.445-55", "(21) 9999-99999", null, escola, null, null);
-		
+		Instituicao empresaQuali = new Instituicao("Fundação Cursos Oliveira", "21 2141-5522", end2, "44.775/5522-11", null);
+		Instituicao empresa = new Instituicao("Restaurante Sabor Total", "21 95663-2541", end2, "21.252.656/5889-95", null);
+		Aprendiz apr1 = new Aprendiz("Pedro Augusto de Assis", "(21) 9533-33331", end1, "041.251.478-56", data, "011.225.445-55", "(21) 9999-99999", empresa, escola, empresaQuali, null);
+
 		pessoaRep.saveAll(Arrays.asList(apr1));
 	}
 }
