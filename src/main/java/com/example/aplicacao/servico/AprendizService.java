@@ -32,6 +32,7 @@ public class AprendizService {
 	}
 	
 	public void delete(Integer id) {
+		repo.deleteById(id);
 		
 	}
 }
