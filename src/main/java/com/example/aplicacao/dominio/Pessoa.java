@@ -5,7 +5,8 @@ import java.io.Serializable;
 import javax.persistence.*;
 
 @Entity
-public class Pessoa implements Serializable{
+@Inheritance(strategy = InheritanceType.JOINED)
+public abstract class Pessoa implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	
@@ -14,6 +15,7 @@ public class Pessoa implements Serializable{
 	private Integer id;
 	private String nome;
 	private String telefone;
+	
 	@OneToOne(cascade = {CascadeType.ALL})
 	private Endereco endereco;
 	public String getNome() {
