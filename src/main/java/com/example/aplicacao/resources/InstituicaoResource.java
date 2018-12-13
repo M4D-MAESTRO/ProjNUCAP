@@ -2,31 +2,30 @@ package com.example.aplicacao.resources;
 
 import java.net.URI;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.example.aplicacao.dominio.Aprendiz;
-import com.example.aplicacao.dto.AprendizDTO;
+import com.example.aplicacao.dominio.Endereco;
+import com.example.aplicacao.dominio.Instituicao;
+import com.example.aplicacao.dominio.Pessoa;
 import com.example.aplicacao.servico.AprendizService;
+import com.example.aplicacao.servico.InstituicaoService;
 
 @RestController
-@RequestMapping(value = "/aprendiz")
-public class AprendizResource {
+@RequestMapping(value = "/instituicao")
+public class InstituicaoResource {
 	
 	@Autowired
-	private AprendizService servico;
+	private InstituicaoService servico;
 	
 	@RequestMapping(value="/{id}", method=RequestMethod.GET)
 	public ResponseEntity<?> find(@PathVariable Integer id) {
-		Aprendiz obj = servico.find(id);
+		Instituicao obj = servico.find(id);
 		return ResponseEntity.ok().body(obj);
 	}
 	
@@ -37,21 +36,20 @@ public class AprendizResource {
 	}*/
 	
 	@RequestMapping(method=RequestMethod.GET)
-	public ResponseEntity<List<AprendizDTO>> getAll() {
-		List<Aprendiz> lista = servico.findAll();
-		List<AprendizDTO> listaDTO = lista.stream().map(obj -> new AprendizDTO(obj)).collect(Collectors.toList());
-		return ResponseEntity.ok().body(listaDTO);
+	public ResponseEntity<List<Instituicao>> findAll() {
+		List<Instituicao> obj = servico.findAll();
+		return ResponseEntity.ok().body(obj);
 	}
 
 	@RequestMapping(method=RequestMethod.POST)
-	public ResponseEntity<Void> insert(@RequestBody Aprendiz obj){
+	public ResponseEntity<Void> insert(@RequestBody Instituicao obj){
 		obj = servico.insert(obj);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
 		return ResponseEntity.created(uri).build();
-	}		
+	}
 	
 	@RequestMapping(value="/{id}", method=RequestMethod.PUT)
-	public ResponseEntity<Void> update(@RequestBody Aprendiz obj, @PathVariable Integer id){
+	public ResponseEntity<Void> update(@RequestBody Instituicao obj, @PathVariable Integer id){
 		obj.setId(id);
 		obj = servico.update(obj);
 		return ResponseEntity.noContent().build();

@@ -7,39 +7,51 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
-import com.example.aplicacao.dominio.Aprendiz;
-import com.example.aplicacao.repositories.AprendizRepository;
+import com.example.aplicacao.dominio.Instituicao;
+import com.example.aplicacao.repositories.InstituicaoRepository;
 import com.example.aplicacao.servico.exception.DataIntegrityException;
 import com.example.aplicacao.servico.exception.ObjectNotFoundException;
 
 @Service
-public class AprendizService {
+public class InstituicaoService {
 	
 	@Autowired
-	private AprendizRepository repo;
+	private InstituicaoRepository repo;
 	
-	public Aprendiz find(Integer id) {
-		Optional<Aprendiz> obj = repo.findById(id);
+	public Instituicao find(Integer id) {
+		Optional<Instituicao> obj = repo.findById(id);
 		return obj.orElseThrow(() -> new ObjectNotFoundException(
-				"Objeto não encontrado! Id: " + id + ", Tipo: " + Aprendiz.class.getName()));
+				"Objeto não encontrado! Id: " + id + ", Tipo: " + Instituicao.class.getName()));
 	}
 	
-	/*public Aprendiz findByName(String nome) {
-		Optional<Aprendiz> obj = repo.findByName(nome);
+	public Instituicao findByType(int tipo) {
+		List<Instituicao> lista = repo.findAll();
+		Instituicao obj = null;
+		for(Instituicao x: lista) {
+			if(x.getTipo().getCod() == tipo) {
+				obj = x;
+			}
+		}
+		
+		return obj;
+	}
+	
+	/*public Instituicao findByName(String nome) {
+		Optional<Instituicao> obj = repo.findByName(nome);
 		return obj.orElse(null);
 	}*/
 	
-	public List<Aprendiz> findAll(){
-		List<Aprendiz> lista = repo.findAll();
+	public List<Instituicao> findAll(){
+		List<Instituicao> lista = repo.findAll();
 		return lista;
 	}
 
 	
-	public Aprendiz insert(Aprendiz obj) {
+	public Instituicao insert(Instituicao obj) {
 		return repo.save(obj);
 	}
 	
-	public Aprendiz update(Aprendiz obj) {
+	public Instituicao update(Instituicao obj) {
 		find(obj.getId());
 		return repo.save(obj);
 	}

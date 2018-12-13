@@ -6,7 +6,7 @@ import java.time.LocalDate;
 import javax.persistence.*;
 
 @Entity
-@PrimaryKeyJoinColumn(name="id")
+//@PrimaryKeyJoinColumn(name="id")
 @Inheritance(strategy=InheritanceType.JOINED)
 public class Aprendiz extends Pessoa {
 
