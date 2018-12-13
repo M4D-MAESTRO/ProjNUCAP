@@ -11,6 +11,7 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
 import com.example.aplicacao.dominio.Aprendiz;
+import com.example.aplicacao.dto.AprendizDTO;
 import com.example.aplicacao.repositories.AprendizRepository;
 import com.example.aplicacao.servico.exception.DataIntegrityException;
 import com.example.aplicacao.servico.exception.ObjectNotFoundException;
@@ -61,5 +62,9 @@ public class AprendizService {
 	public Page<Aprendiz> findPage(Integer page, Integer linesPerPage, String orderBy, String direction){
 		PageRequest pageRequest = PageRequest.of(page, linesPerPage,Direction.valueOf(direction), orderBy);
 		return repo.findAll(pageRequest);
+	}
+	
+	public Aprendiz fromDTO(AprendizDTO objDTO) {
+		return new Aprendiz(objDTO.getNome(), objDTO.getTelefone(), null, objDTO.getId());
 	}
 }

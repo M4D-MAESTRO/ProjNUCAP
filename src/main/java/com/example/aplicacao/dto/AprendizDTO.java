@@ -3,6 +3,10 @@ package com.example.aplicacao.dto;
 import java.io.Serializable;
 import java.time.LocalDate;
 
+import javax.validation.constraints.NotEmpty;
+
+import org.hibernate.validator.constraints.Length;
+
 import com.example.aplicacao.dominio.Aprendiz;
 
 public class AprendizDTO implements Serializable{
@@ -10,6 +14,8 @@ public class AprendizDTO implements Serializable{
 	private static final long serialVersionUID = 1L;
 
 	private Integer id;
+	
+	@NotEmpty(message = "Preenchimento obrigatório!")
 	private String nome;
 	private String telefone;
 	
