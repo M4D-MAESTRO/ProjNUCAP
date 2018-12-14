@@ -68,7 +68,7 @@ public class AprendizResource {
 	
 	@RequestMapping(value="/{id}", method=RequestMethod.PUT)
 	public ResponseEntity<Void> update(@Valid @RequestBody AprendizDTO objDTO, @PathVariable Integer id){
-		Aprendiz obj = servico.fromDTO(objDTO);
+		Aprendiz obj = servico.fromDTO(objDTO);	
 		obj.setId(id);
 		obj = servico.update(obj);
 		return ResponseEntity.noContent().build();
