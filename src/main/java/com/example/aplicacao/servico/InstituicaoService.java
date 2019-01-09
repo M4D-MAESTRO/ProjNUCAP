@@ -5,9 +5,19 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
+import com.example.aplicacao.dominio.Aprendiz;
+import com.example.aplicacao.dominio.Cidade;
+import com.example.aplicacao.dominio.Endereco;
 import com.example.aplicacao.dominio.Instituicao;
+import com.example.aplicacao.dominio.enums.TipoInstituicao;
+import com.example.aplicacao.dto.InstituicaoDTO;
+import com.example.aplicacao.dto.InstituicaoNewDTO;
 import com.example.aplicacao.repositories.InstituicaoRepository;
 import com.example.aplicacao.servico.exception.DataIntegrityException;
 import com.example.aplicacao.servico.exception.ObjectNotFoundException;
@@ -45,15 +55,24 @@ public class InstituicaoService {
 		List<Instituicao> lista = repo.findAll();
 		return lista;
 	}
-
 	
 	public Instituicao insert(Instituicao obj) {
 		return repo.save(obj);
 	}
-	
+
+
 	public Instituicao update(Instituicao obj) {
-		find(obj.getId());
-		return repo.save(obj);
+		Instituicao newObj = find(obj.getId());
+		updateData(newObj, obj);
+		return repo.save(newObj);
+	}
+	
+	private void updateData(Instituicao newObj, Instituicao obj) {
+		newObj.setNome(obj.getNome());
+		newObj.setTelefone(obj.getTelefone());
+		newObj.setEmail(obj.getEmail());
+		newObj.setCnpj(obj.getCnpj());
+		
 	}
 	
 	public void delete(Integer id) {
@@ -62,8 +81,45 @@ public class InstituicaoService {
 		try {
 			repo.deleteById(id);			
 		}catch(DataIntegrityViolationException e) {
-			throw new DataIntegrityException("Não é possível excluir uma categoria que possui produtos cadastrados");
+			throw new DataIntegrityException("Não é possível excluir Instituição relacionada a um Aprendiz");
 		};
 		
 	}
+	
+	public Page<Instituicao> findPage(Integer page, Integer linesPerPage, String orderBy, String direction){
+		PageRequest pageRequest = PageRequest.of(page, linesPerPage,Direction.valueOf(direction), orderBy);
+		return repo.findAll(pageRequest);
+	}
+	
+	public Page<Instituicao> findInstituicao(Integer page, Integer linesPerPage, String orderBy, String direction, String nome){
+		PageRequest pageRequest = PageRequest.of(page, linesPerPage,Direction.valueOf(direction), orderBy);
+		return repo.findDistinctByNomeContaining(nome,pageRequest);
+	}
+	
+	public Page<Instituicao> findInstituicaoByTipo(Integer page, Integer linesPerPage, String orderBy, String direction, Integer tipo){
+		PageRequest pageRequest = PageRequest.of(page, linesPerPage,Direction.valueOf(direction), orderBy);
+		return repo.findDistinctByTipo(tipo,pageRequest);
+	}
+	
+	public Page<Instituicao> findInstituicaoCNPJ(Integer page, Integer linesPerPage, String orderBy, String direction, String cnpj){
+		PageRequest pageRequest = PageRequest.of(page, linesPerPage,Direction.valueOf(direction), orderBy);
+		//List<Aprendiz> lista = repo.findListOfName(nome);
+		Instituicao exemplo =  new Instituicao();
+		exemplo.setCnpj(cnpj);
+		return repo.findAll(Example.of(exemplo), pageRequest);
+	}
+	
+	public Instituicao fromDTO(InstituicaoDTO objDTO) {
+		return new Instituicao(objDTO.getNome(), objDTO.getTelefone(), null,objDTO.getEmail(), objDTO.getCnpj(), null, objDTO.getId()); 
+	}
+	
+	public Instituicao fromDTO(InstituicaoNewDTO objDTO) {
+		Cidade ci = new Cidade(objDTO.getIdCidade(), null, null);
+		Endereco end = new Endereco(objDTO.getEndereco(), objDTO.getComplemento(), objDTO.getBairro(), ci, null);
+		return new Instituicao(objDTO.getNome(), objDTO.getTelefone(), end, objDTO.getEmail() , objDTO.getCnpj(), TipoInstituicao.toEnum(objDTO.getTipo()), objDTO.getId());
+	}
+	
+	
+	
+	
 }

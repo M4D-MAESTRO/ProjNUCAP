@@ -3,23 +3,35 @@ package com.example.aplicacao.dto;
 import java.io.Serializable;
 import java.time.LocalDate;
 
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 
-import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.br.CPF;
 
 import com.example.aplicacao.dominio.Aprendiz;
+import com.example.aplicacao.servico.validation.AprendizUpdate;
 
+@AprendizUpdate
 public class AprendizDTO implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 
 	private Integer id;
 	
-	@NotEmpty(message = "Preenchimento obrigatório!")
+	@NotEmpty(message = "Preenchimento do nome é obrigatório!")
 	private String nome;
+	
+	@NotEmpty(message = "Preenchimento do telefone é obrigatório!")
 	private String telefone;
 	
+	@NotEmpty(message = "Preenchimento do email é obrigatório!")
+	@Email(message = "Email inválido!")
+	private String email;
+	
+	@NotEmpty(message = "Preenchimento do CPF é obrigatório!")
+	//@CPF
 	private String cpf;
+	
 	private LocalDate dataNascimento;
 	
 	
@@ -30,10 +42,10 @@ public class AprendizDTO implements Serializable{
 	public AprendizDTO(Aprendiz obj) {
 		id = obj.getId();
 		nome = obj.getNome();
+		email = obj.getEmail();
 		telefone = obj.getTelefone();
 		cpf = obj.getCpf();
 		dataNascimento = obj.getDataNascimento();
-		
 		
 	}
 
@@ -75,6 +87,14 @@ public class AprendizDTO implements Serializable{
 
 	public void setDataNascimento(LocalDate dataNascimento) {
 		this.dataNascimento = dataNascimento;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 	
 	

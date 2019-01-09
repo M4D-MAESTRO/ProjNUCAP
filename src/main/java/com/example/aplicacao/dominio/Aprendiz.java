@@ -66,9 +66,9 @@ public class Aprendiz extends Pessoa {
 	public void setEmpresaQuali(Instituicao empresaQuali) {
 		this.empresaQuali = empresaQuali;
 	}
-	public Aprendiz(String nome, String telefone, Endereco endereco, String cpf, LocalDate dataNascimento,
+	public Aprendiz(String nome, String telefone, Endereco endereco, String email, String cpf, LocalDate dataNascimento,
 			String cpfResp, String telefoneResp, Instituicao trabalho, Instituicao escola, Instituicao empresaQuali, Integer id) {
-		super(nome, telefone, endereco, id);
+		super(nome, telefone, endereco, email, id);
 		this.cpf = cpf;
 		this.dataNascimento = dataNascimento;
 		this.cpfResp = cpfResp;
@@ -76,13 +76,16 @@ public class Aprendiz extends Pessoa {
 		this.trabalho = trabalho;
 		this.escola = escola;
 		this.empresaQuali = empresaQuali;
+		super.setEmail(email);
 	}
-	public Aprendiz(String nome, String telefone, Endereco endereco, Integer id) {
-		super(nome, telefone, endereco, id);
+	public Aprendiz(String nome, String telefone, Endereco endereco, String email, Integer id) {
+		super(nome, telefone, endereco, email, id);
 	}
 
 	public Aprendiz() {
 		
 	}
 
+	
+	
 }

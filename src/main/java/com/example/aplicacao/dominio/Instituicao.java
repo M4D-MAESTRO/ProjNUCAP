@@ -28,18 +28,22 @@ public class Instituicao extends Pessoa{
 		this.tipo = tipo.getCod();
 	}
 	
-	public Instituicao(String nome, String telefone, Endereco endereco, String cnpj,TipoInstituicao tipo, Integer id) {
-		super(nome, telefone, endereco,id);
+	public Instituicao(String nome, String telefone, Endereco endereco, String email, String cnpj,TipoInstituicao tipo, Integer id) {
+		super(nome, telefone, endereco, email, id);
 		this.cnpj = cnpj;
-		this.tipo = tipo.getCod();
+		this.tipo = (tipo == null) ? null :  tipo.getCod();
 	}
 
-	public Instituicao(String nome, String telefone, Endereco endereco, Integer id) {
-		super(nome, telefone, endereco, id);
+	public Instituicao(String nome, String telefone, Endereco endereco, String email, Integer id) {
+		super(nome, telefone, endereco, email, id);
 	}
 	
 	public Instituicao() {
 		
+	}
+	
+	public Instituicao(Integer id) {
+		super(id);
 	}
 
 }

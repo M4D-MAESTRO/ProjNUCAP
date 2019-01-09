@@ -4,6 +4,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Endereco {
@@ -14,8 +16,23 @@ public class Endereco {
 	private String endereco;
 	private String complemento;
 	private String bairro;
-	private String cidade;
-	private String estado;
+	
+	@ManyToOne
+	@JoinColumn(name="cidade_id")
+	private Cidade cidade;
+	
+	public Integer getId() {
+		return id;
+	}
+	public void setId(Integer id) {
+		this.id = id;
+	}
+	public Cidade getCidade() {
+		return cidade;
+	}
+	public void setCidade(Cidade cidade) {
+		this.cidade = cidade;
+	}
 	public String getEndereco() {
 		return endereco;
 	}
@@ -34,25 +51,13 @@ public class Endereco {
 	public void setBairro(String bairro) {
 		this.bairro = bairro;
 	}
-	public String getCidade() {
-		return cidade;
-	}
-	public void setCidade(String cidade) {
-		this.cidade = cidade;
-	}
-	public String getEstado() {
-		return estado;
-	}
-	public void setEstado(String estado) {
-		this.estado = estado;
-	}
-	public Endereco(String endereco, String complemento, String bairro, String cidade, String estado, Integer id) {
+	
+	public Endereco(String endereco, String complemento, String bairro, Cidade cidade, Integer id) {
 		super();
 		this.endereco = endereco;
 		this.complemento = complemento;
 		this.bairro = bairro;
 		this.cidade = cidade;
-		this.estado = estado;
 		this.id = id;
 	}
 	public Endereco() {
@@ -61,7 +66,7 @@ public class Endereco {
 	@Override
 	public String toString() {
 		return "Endereco [id=" + id + ", endereco=" + endereco + ", complemento=" + complemento + ", bairro=" + bairro
-				+ ", cidade=" + cidade + ", estado=" + estado + "]";
+				+ ", cidade=" + cidade + ", estado=" + cidade.getEstado().getNome() + "]";
 	}
 
 	
