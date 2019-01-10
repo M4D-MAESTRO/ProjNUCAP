@@ -65,8 +65,9 @@ public class Endereco {
 	}
 	@Override
 	public String toString() {
-		return "Endereco [id=" + id + ", endereco=" + endereco + ", complemento=" + complemento + ", bairro=" + bairro
-				+ ", cidade=" + cidade + ", estado=" + cidade.getEstado().getNome() + "]";
+		return "Endereco: " + endereco + ", complemento "  + "\n"
+				+ "Bairro " + bairro
+				+ ", cidade " + cidade.getNome() + " - " + cidade.getEstado().getNome();
 	}
 
 	

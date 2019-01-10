@@ -83,7 +83,10 @@ public  class Pessoa implements Serializable{
 	
 	@Override
 	public String toString() {
-		return "Pessoa [id=" + id + ", nome=" + nome + ", telefone=" + telefone + ", endereco=" + endereco + "]";
+		return "Código de Identificação: " + id + "\n"
+				+ "Telefone:" + telefone + "\n"
+				+ "Email: " + email + "\n"
+				+ endereco.toString();
 	}
 	
 	

@@ -35,6 +35,7 @@ public class AprendizService {
 	
 	public Aprendiz find(Integer id) {
 		Optional<Aprendiz> obj = repo.findById(id);
+		System.out.println(obj);
 		return obj.orElseThrow(() -> new ObjectNotFoundException(
 				"Objeto não encontrado! Id: " + id + ", Tipo: " + Aprendiz.class.getName()));
 	}
@@ -45,6 +46,7 @@ public class AprendizService {
 	}
 	
 	public Aprendiz insert(Aprendiz obj) {
+		
 		return repo.save(obj);
 	}
 	

@@ -85,7 +85,18 @@ public class Aprendiz extends Pessoa {
 	public Aprendiz() {
 		
 	}
-
 	
+	@Override
+	public String toString() {
+		return "Aprendiz - " + super.getNome() + "\n"
+				+ super.toString() + "\n"
+				+ "CPF: " + cpf + ", data de nascimento " + dataNascimento + "\n"
+				+ "CPF do Responsável: " + cpfResp + ", telefone do responsável " + telefoneResp + "\n\n"
+				+ "Instituição de trabalho: " + trabalho.getNome() + "\n"
+				+ "Instituição de Escola: " + escola.getNome() + "\n"
+				+ "Instituição Qualificadora: " + empresaQuali.getNome();
+	}
+
+			
 	
 }
