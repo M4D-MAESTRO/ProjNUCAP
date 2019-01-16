@@ -29,14 +29,14 @@ public class Instituicao extends Pessoa {
 	}
 
 	public Instituicao(String nome, String telefone, Endereco endereco, String email, String cnpj, TipoInstituicao tipo,
-			Integer id) {
-		super(nome, telefone, endereco, email, id);
+			Integer id, String senha) {
+		super(nome, telefone, endereco, email, id, senha);
 		this.cnpj = cnpj;
 		this.tipo = (tipo == null) ? null : tipo.getCod();
 	}
 
-	public Instituicao(String nome, String telefone, Endereco endereco, String email, Integer id) {
-		super(nome, telefone, endereco, email, id);
+	public Instituicao(String nome, String telefone, Endereco endereco, String email, Integer id, String senha) {
+		super(nome, telefone, endereco, email, id, senha);
 	}
 
 	public Instituicao() {

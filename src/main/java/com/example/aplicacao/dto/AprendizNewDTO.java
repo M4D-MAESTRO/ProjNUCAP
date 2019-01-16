@@ -38,6 +38,8 @@ public class AprendizNewDTO implements Serializable{
 	@NotEmpty(message = "Preenchimento do número telefónico do responsável é obrigatório!")
 	private String telefoneResp;
 	
+	private String senha;
+	
 	//Endereco
 	private String endereco;
 	private String complemento;
@@ -181,6 +183,14 @@ public class AprendizNewDTO implements Serializable{
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public String getSenha() {
+		return senha;
+	}
+
+	public void setSenha(String senha) {
+		this.senha = senha;
 	}
 	
 	

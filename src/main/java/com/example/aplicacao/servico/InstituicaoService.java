@@ -9,6 +9,7 @@ import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort.Direction;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.example.aplicacao.dominio.Aprendiz;
@@ -27,6 +28,9 @@ public class InstituicaoService {
 	
 	@Autowired
 	private InstituicaoRepository repo;
+	
+	@Autowired
+	private BCryptPasswordEncoder pe;
 	
 	public Instituicao find(Integer id) {
 		Optional<Instituicao> obj = repo.findById(id);
@@ -110,13 +114,13 @@ public class InstituicaoService {
 	}
 	
 	public Instituicao fromDTO(InstituicaoDTO objDTO) {
-		return new Instituicao(objDTO.getNome(), objDTO.getTelefone(), null,objDTO.getEmail(), objDTO.getCnpj(), null, objDTO.getId()); 
+		return new Instituicao(objDTO.getNome(), objDTO.getTelefone(), null,objDTO.getEmail(), objDTO.getCnpj(), null, objDTO.getId(), null); 
 	}
 	
 	public Instituicao fromDTO(InstituicaoNewDTO objDTO) {
 		Cidade ci = new Cidade(objDTO.getIdCidade(), null, null);
 		Endereco end = new Endereco(objDTO.getEndereco(), objDTO.getComplemento(), objDTO.getBairro(), ci, null);
-		return new Instituicao(objDTO.getNome(), objDTO.getTelefone(), end, objDTO.getEmail() , objDTO.getCnpj(), TipoInstituicao.toEnum(objDTO.getTipo()), objDTO.getId());
+		return new Instituicao(objDTO.getNome(), objDTO.getTelefone(), end, objDTO.getEmail() , objDTO.getCnpj(), TipoInstituicao.toEnum(objDTO.getTipo()), objDTO.getId(), pe.encode(objDTO.getSenha()));
 	}
 	
 	

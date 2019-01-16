@@ -10,6 +10,7 @@ import org.hibernate.validator.constraints.br.CNPJ;
 import com.example.aplicacao.dominio.Aprendiz;
 import com.example.aplicacao.dominio.Instituicao;
 import com.example.aplicacao.servico.validation.InstituicaoUpdate;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @InstituicaoUpdate
 public class InstituicaoDTO implements Serializable{
@@ -84,8 +85,6 @@ public class InstituicaoDTO implements Serializable{
 
 	public void setEmail(String email) {
 		this.email = email;
-	}
-	
-	
+	}	
 
 }

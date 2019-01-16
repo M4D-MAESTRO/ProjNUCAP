@@ -2,8 +2,13 @@ package com.example.aplicacao.dominio;
 
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.OneToOne;
 
 @Entity
 //@PrimaryKeyJoinColumn(name="id")
@@ -67,8 +72,8 @@ public class Aprendiz extends Pessoa {
 		this.empresaQuali = empresaQuali;
 	}
 	public Aprendiz(String nome, String telefone, Endereco endereco, String email, String cpf, LocalDate dataNascimento,
-			String cpfResp, String telefoneResp, Instituicao trabalho, Instituicao escola, Instituicao empresaQuali, Integer id) {
-		super(nome, telefone, endereco, email, id);
+			String cpfResp, String telefoneResp, Instituicao trabalho, Instituicao escola, Instituicao empresaQuali, Integer id, String senha) {
+		super(nome, telefone, endereco, email, id, senha);
 		this.cpf = cpf;
 		this.dataNascimento = dataNascimento;
 		this.cpfResp = cpfResp;
@@ -78,8 +83,8 @@ public class Aprendiz extends Pessoa {
 		this.empresaQuali = empresaQuali;
 		super.setEmail(email);
 	}
-	public Aprendiz(String nome, String telefone, Endereco endereco, String email, Integer id) {
-		super(nome, telefone, endereco, email, id);
+	public Aprendiz(String nome, String telefone, Endereco endereco, String email, Integer id, String senha) {
+		super(nome, telefone, endereco, email, id, senha);
 	}
 
 	public Aprendiz() {
@@ -87,10 +92,11 @@ public class Aprendiz extends Pessoa {
 	}
 	
 	@Override
-	public String toString() {
+	public String toString() {		
+		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 		return "Aprendiz - " + super.getNome() + "\n"
 				+ super.toString() + "\n"
-				+ "CPF: " + cpf + ", data de nascimento " + dataNascimento + "\n"
+				+ "CPF: " + cpf + ", data de nascimento " + dataNascimento.format(dtf) + "\n"
 				+ "CPF do Responsável: " + cpfResp + ", telefone do responsável " + telefoneResp + "\n\n"
 				+ "Instituição de trabalho: " + trabalho.getNome() + "\n"
 				+ "Instituição de Escola: " + escola.getNome() + "\n"

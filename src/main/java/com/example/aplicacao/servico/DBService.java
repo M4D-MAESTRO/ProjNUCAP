@@ -1,9 +1,10 @@
-package com.example.aplicacao.servico;
+	package com.example.aplicacao.servico;
 
 import java.time.LocalDate;
 import java.util.Arrays;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.example.aplicacao.dominio.Aprendiz;
@@ -38,6 +39,9 @@ public class DBService {
 	@Autowired
 	private EstadoRepository estadoRepository;
 	
+	@Autowired
+	private BCryptPasswordEncoder pe;
+	
 	public void instantiateDataBase() {
 				//Instancia de Estado e Cidade
 		
@@ -63,23 +67,23 @@ public class DBService {
 				enderecoRep.saveAll(Arrays.asList(end1, end2));
 				
 				aux = instituicaoRep.count(); 
-				Instituicao escola = new Instituicao("Centro Educacional Futuro Certo", "(21) 988554525",end2 ,"centroedu@gmail.com" ,"25.561.654/6321-68",TipoInstituicao.ESCOLA ,Salvamento.getCodInstituicao(aux));
+				Instituicao escola = new Instituicao("Centro Educacional Futuro Certo", "(21) 988554525",end2 ,"centroedu@gmail.com" ,"25.561.654/6321-68",TipoInstituicao.ESCOLA ,Salvamento.getCodInstituicao(aux), pe.encode("senha1"));
 				instituicaoRep.saveAll(Arrays.asList(escola));
 				
 				aux = instituicaoRep.count(); 
-				Instituicao empresaQuali = new Instituicao("Fundação Cursos Oliveira", "(21) 2141-5522", end2,"fundaoliveira@gmail.com" , "44.775/5522-11",TipoInstituicao.QUALIFICADORA,  Salvamento.getCodInstituicao(aux));
+				Instituicao empresaQuali = new Instituicao("Fundação Cursos Oliveira", "(21) 2141-5522", end2,"fundaoliveira@gmail.com" , "44.775/5522-11",TipoInstituicao.QUALIFICADORA,  Salvamento.getCodInstituicao(aux), pe.encode("senha2"));
 				instituicaoRep.saveAll(Arrays.asList(empresaQuali));
 				
 				aux = instituicaoRep.count(); 
-				Instituicao empresa = new Instituicao("Restaurante Sabor Total", "(21) 95663-2541", end2,"sabortotal@gmail.com" , "21.252.656/5889-95",TipoInstituicao.LABORAL, Salvamento.getCodInstituicao(aux));
+				Instituicao empresa = new Instituicao("Restaurante Sabor Total", "(21) 95663-2541", end2,"sabortotal@gmail.com" , "21.252.656/5889-95",TipoInstituicao.LABORAL, Salvamento.getCodInstituicao(aux), pe.encode("senha3"));
 				instituicaoRep.saveAll(Arrays.asList(empresa));
 				
 				aux = aprendizRep.count();
-				Aprendiz apr1 = new Aprendiz("Pedro Augusto de Assis", "(21) 9533-33331", end1,"augusto@gmail.com" , "041.251.478-56", data, "011.225.445-55", "(21) 9999-99999", empresa, escola, empresaQuali,  Salvamento.getCodAprendiz(aux));
+				Aprendiz apr1 = new Aprendiz("Pedro Augusto de Assis", "(21) 9533-33331", end1,"augusto@gmail.com" , "041.251.478-56", data, "011.225.445-55", "(21) 9999-99999", empresa, escola, empresaQuali,  Salvamento.getCodAprendiz(aux), pe.encode("senha4"));
 				aprendizRep.saveAll(Arrays.asList(apr1));
 				
 				aux = aprendizRep.count();
-				Aprendiz apr2 = new Aprendiz("Wendel Dias Reis", "(21) 9533-33331", end1,"diasreis@gmail.com" , "041.251.478-56", data, "011.225.445-55", "(21) 9999-99999",empresaQuali , escola, empresa,  Salvamento.getCodAprendiz(aux));
+				Aprendiz apr2 = new Aprendiz("Wendel Dias Reis", "(21) 9533-33331", end1,"diasreis@gmail.com" , "041.251.478-56", data, "011.225.445-55", "(21) 9999-99999",empresaQuali , escola, empresa,  Salvamento.getCodAprendiz(aux), pe.encode("senha5"));
 				aprendizRep.saveAll(Arrays.asList(apr2));
 	}
 

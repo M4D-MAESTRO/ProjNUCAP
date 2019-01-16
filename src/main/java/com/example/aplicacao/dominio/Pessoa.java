@@ -5,6 +5,7 @@ import java.io.Serializable;
 import javax.persistence.*;
 
 import com.example.aplicacao.servico.validation.AprendizUpdate;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
 @Entity
@@ -21,6 +22,9 @@ public  class Pessoa implements Serializable{
 	
 	@Column(unique = true)
 	private String email;
+	
+	@JsonIgnore
+	private String senha;
 	
 	@OneToOne(cascade = {CascadeType.ALL})
 	private Endereco endereco;
@@ -61,13 +65,14 @@ public  class Pessoa implements Serializable{
 		this.email = email;
 	}
 	
-	public Pessoa(String nome, String telefone, Endereco endereco, String email, Integer id) {
+	public Pessoa(String nome, String telefone, Endereco endereco, String email, Integer id, String senha) {
 		super();
 		this.nome = nome;
 		this.telefone = telefone;
 		this.endereco = endereco;
 		this.email = email;
 		this.id = id;
+		this.senha = senha;
 	}
 	
 	
@@ -87,6 +92,12 @@ public  class Pessoa implements Serializable{
 				+ "Telefone:" + telefone + "\n"
 				+ "Email: " + email + "\n"
 				+ endereco.toString();
+	}
+	public String getSenha() {
+		return senha;
+	}
+	public void setSenha(String senha) {
+		this.senha = senha;
 	}
 	
 	

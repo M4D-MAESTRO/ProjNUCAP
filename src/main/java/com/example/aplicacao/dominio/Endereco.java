@@ -65,7 +65,7 @@ public class Endereco {
 	}
 	@Override
 	public String toString() {
-		return "Endereco: " + endereco + ", complemento "  + "\n"
+		return "Endereco: " + endereco + ", "  + "\n"
 				+ "Bairro " + bairro
 				+ ", cidade " + cidade.getNome() + " - " + cidade.getEstado().getNome();
 	}

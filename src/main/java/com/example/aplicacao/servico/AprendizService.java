@@ -11,6 +11,7 @@ import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort.Direction;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.example.aplicacao.dominio.Aprendiz;
@@ -28,14 +29,20 @@ import com.example.aplicacao.servico.exception.ObjectNotFoundException;
 public class AprendizService {
 	
 	@Autowired
+	private BCryptPasswordEncoder pe;
+	
+	@Autowired
 	private AprendizRepository repo;
 	
 	@Autowired
 	private InstituicaoRepository instituicaoRep;
 	
+	@Autowired
+	private EmailService emailService;
+	
 	public Aprendiz find(Integer id) {
 		Optional<Aprendiz> obj = repo.findById(id);
-		System.out.println(obj);
+		//System.out.println(obj);
 		return obj.orElseThrow(() -> new ObjectNotFoundException(
 				"Objeto não encontrado! Id: " + id + ", Tipo: " + Aprendiz.class.getName()));
 	}
@@ -46,8 +53,10 @@ public class AprendizService {
 	}
 	
 	public Aprendiz insert(Aprendiz obj) {
-		
-		return repo.save(obj);
+		obj = repo.save(obj);
+		//System.out.println(obj);
+		emailService.sendRegistrationHtmlEmail(obj);
+		return obj;
 	}
 	
 	public List<Aprendiz> findAll(){
@@ -116,7 +125,7 @@ public class AprendizService {
 	}
 	
 	public Aprendiz fromDTO(AprendizDTO objDTO) {
-		return new Aprendiz(objDTO.getNome(), objDTO.getTelefone(), null, objDTO.getEmail() ,objDTO.getCpf(), objDTO.getDataNascimento(), null, null, null, null, null, objDTO.getId());
+		return new Aprendiz(objDTO.getNome(), objDTO.getTelefone(), null, objDTO.getEmail() ,objDTO.getCpf(), objDTO.getDataNascimento(), null, null, null, null, null, objDTO.getId(), null);
 	}
 	
 	public Aprendiz fromDTO(AprendizNewDTO objDTO) {
@@ -131,6 +140,6 @@ public class AprendizService {
 		Instituicao trab = instituicaoRep.getOne(objDTO.getIdTrabalho());
 		Instituicao empQual = instituicaoRep.getOne(objDTO.getIdEmpresaQuali());
 		
-		return new Aprendiz(objDTO.getNome(), objDTO.getTelefone(), end, objDTO.getEmail() , objDTO.getCpf(), objDTO.getDataNascimento(), objDTO.getCpfResp(), objDTO.getTelefoneResp(),trab ,escola, empQual, objDTO.getId());
+		return new Aprendiz(objDTO.getNome(), objDTO.getTelefone(), end, objDTO.getEmail() , objDTO.getCpf(), objDTO.getDataNascimento(), objDTO.getCpfResp(), objDTO.getTelefoneResp(),trab ,escola, empQual, objDTO.getId(), pe.encode(objDTO.getSenha()));
 	}
 }

@@ -30,6 +30,10 @@ public class InstituicaoNewDTO implements Serializable{
 	
 	private Integer tipo;
 	
+	@NotEmpty(message = "Preenchimento da senha é obrigatório!")
+	private String senha;
+	
+	
 	//Endereco
 	private String endereco;
 	private String complemento;
@@ -129,7 +133,13 @@ public class InstituicaoNewDTO implements Serializable{
 		this.idEstado = idEstado;
 	}
 
-	
+	public String getSenha() {
+		return senha;
+	}
+
+	public void setSenha(String senha) {
+		this.senha = senha;
+	}
 	
 	
 	

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title th:remove="all">Confirmação de Registro</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+	<div>
+		<h1>
+			Código de identificação: <span th:text="${aprendiz.id}"> </span>
+		</h1>
+
+		<p>
+			<b>Aprendiz:</b> <span th:text="${aprendiz.nome}"></span> <br>
+			<br> Telefone:<span th:text="${aprendiz.telefone}"></span> <br>
+			Email: <span th:text="${aprendiz.email}"></span> <br>
+			CPF: <span th:text="${aprendiz.cpf}"></span>, data de nascimento <span th:text="${#temporals.format(aprendiz.dataNascimento, 'dd/MM/yyyy')}"></span> <br>
+		    CPF do Responsável: <span th:text="${aprendiz.cpfResp}"></span>, telefone do responsável <span th:text="${aprendiz.telefoneResp}"></span> <br><br>
+		    Endereco: <span th:text="${aprendiz.endereco.endereco}"></span> <span th:text="${aprendiz.endereco.complemento}"></span> - <span th:text="${aprendiz.endereco.bairro}"></span>, <span th:text="${aprendiz.endereco.cidade.nome}"></span> - <span th:text="${aprendiz.endereco.cidade.estado.nome}"></span> <br>
+			
+		</p>
+
+		<h3>Instituição:</h3>
+
+		<ul>
+			<li><b>De trabalho</b></li>
+			<span th:text="${aprendiz.trabalho.nome}">nome</span>
+			<li><b>Escolar</b></li>
+			<span th:text="${aprendiz.escola.nome}">nome</span>
+			<li><b>Qualificadora</b></li>
+			<span th:text="${aprendiz.empresaQuali.nome}">nome</span>
+		</ul>
+
+	</div>
+</body>
+</html>
