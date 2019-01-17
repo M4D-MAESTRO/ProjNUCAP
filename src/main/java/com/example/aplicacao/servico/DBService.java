@@ -13,6 +13,7 @@ import com.example.aplicacao.dominio.Endereco;
 import com.example.aplicacao.dominio.Estado;
 import com.example.aplicacao.dominio.Instituicao;
 import com.example.aplicacao.dominio.Salvamento;
+import com.example.aplicacao.dominio.enums.Perfil;
 import com.example.aplicacao.dominio.enums.TipoInstituicao;
 import com.example.aplicacao.repositories.AprendizRepository;
 import com.example.aplicacao.repositories.CidadeRepository;
@@ -68,14 +69,17 @@ public class DBService {
 				
 				aux = instituicaoRep.count(); 
 				Instituicao escola = new Instituicao("Centro Educacional Futuro Certo", "(21) 988554525",end2 ,"centroedu@gmail.com" ,"25.561.654/6321-68",TipoInstituicao.ESCOLA ,Salvamento.getCodInstituicao(aux), pe.encode("senha1"));
+				escola.addPerfil(Perfil.ADMIN);
 				instituicaoRep.saveAll(Arrays.asList(escola));
 				
 				aux = instituicaoRep.count(); 
 				Instituicao empresaQuali = new Instituicao("Fundação Cursos Oliveira", "(21) 2141-5522", end2,"fundaoliveira@gmail.com" , "44.775/5522-11",TipoInstituicao.QUALIFICADORA,  Salvamento.getCodInstituicao(aux), pe.encode("senha2"));
+				empresaQuali.addPerfil(Perfil.ADMIN);
 				instituicaoRep.saveAll(Arrays.asList(empresaQuali));
 				
 				aux = instituicaoRep.count(); 
 				Instituicao empresa = new Instituicao("Restaurante Sabor Total", "(21) 95663-2541", end2,"sabortotal@gmail.com" , "21.252.656/5889-95",TipoInstituicao.LABORAL, Salvamento.getCodInstituicao(aux), pe.encode("senha3"));
+				empresa.addPerfil(Perfil.ADMIN);
 				instituicaoRep.saveAll(Arrays.asList(empresa));
 				
 				aux = aprendizRep.count();

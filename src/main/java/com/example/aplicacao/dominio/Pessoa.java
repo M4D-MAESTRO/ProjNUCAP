@@ -1,10 +1,22 @@
 package com.example.aplicacao.dominio;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.stream.Collectors;
 
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.CollectionTable;
+import javax.persistence.Column;
+import javax.persistence.ElementCollection;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.OneToOne;
 
-import com.example.aplicacao.servico.validation.AprendizUpdate;
+import com.example.aplicacao.dominio.enums.Perfil;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
@@ -28,6 +40,10 @@ public  class Pessoa implements Serializable{
 	
 	@OneToOne(cascade = {CascadeType.ALL})
 	private Endereco endereco;
+	
+	@ElementCollection(fetch=FetchType.EAGER)
+	@CollectionTable(name="PERFIS")
+	private Set<Integer> perfis = new HashSet<>();
 	
 	public String getNome() {
 		return nome;
@@ -73,12 +89,14 @@ public  class Pessoa implements Serializable{
 		this.email = email;
 		this.id = id;
 		this.senha = senha;
+		addPerfil(Perfil.USUARIO);
 	}
 	
 	
 	
 	public Pessoa() {
 		super();
+		addPerfil(Perfil.USUARIO);
 	}
 	
 	public Pessoa(Integer id) {
@@ -100,8 +118,13 @@ public  class Pessoa implements Serializable{
 		this.senha = senha;
 	}
 	
+	public Set<Perfil> getPerfis(){
+		return perfis.stream().map(x -> Perfil.toEnum(x)).collect(Collectors.toSet());
+	}
 	
-	
+	public void addPerfil(Perfil perfil) {
+		perfis.add(perfil.getCod());
+	}
 	
 
 }
