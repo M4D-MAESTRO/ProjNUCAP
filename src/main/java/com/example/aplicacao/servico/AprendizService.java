@@ -7,7 +7,6 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Example;
-import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort.Direction;
@@ -22,6 +21,8 @@ import com.example.aplicacao.dto.AprendizDTO;
 import com.example.aplicacao.dto.AprendizNewDTO;
 import com.example.aplicacao.repositories.AprendizRepository;
 import com.example.aplicacao.repositories.InstituicaoRepository;
+import com.example.aplicacao.security.UserSS;
+import com.example.aplicacao.servico.exception.AuthorizationException;
 import com.example.aplicacao.servico.exception.DataIntegrityException;
 import com.example.aplicacao.servico.exception.ObjectNotFoundException;
 
@@ -41,6 +42,13 @@ public class AprendizService {
 	private EmailService emailService;
 	
 	public Aprendiz find(Integer id) {
+		UserSS user = UserService.authenticated();
+		
+		if(user == null || !id.equals(user.getId())) {
+			throw new AuthorizationException("Acesso negado!");
+			
+		}
+		
 		Optional<Aprendiz> obj = repo.findById(id);
 		//System.out.println(obj);
 		return obj.orElseThrow(() -> new ObjectNotFoundException(
