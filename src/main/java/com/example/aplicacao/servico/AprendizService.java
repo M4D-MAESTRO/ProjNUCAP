@@ -55,6 +55,10 @@ public class AprendizService {
 				"Objeto não encontrado! Id: " + id + ", Tipo: " + Aprendiz.class.getName()));
 	}
 	
+	public Long getCount() {
+		return repo.count();
+	}
+	
 	public Aprendiz findByName(String nome) {
 		Aprendiz obj = repo.findByNome(nome);
 		return obj;
@@ -133,7 +137,7 @@ public class AprendizService {
 	}
 	
 	public Aprendiz fromDTO(AprendizDTO objDTO) {
-		return new Aprendiz(objDTO.getNome(), objDTO.getTelefone(), null, objDTO.getEmail() ,objDTO.getCpf(), objDTO.getDataNascimento(), null, null, null, null, null, objDTO.getId(), null);
+		return new Aprendiz(objDTO.getNome(), objDTO.getTelefone(), null, objDTO.getEmail() ,objDTO.getCpf(), objDTO.getDataNascimento(), null, null, null, objDTO.getId(), null);
 	}
 	
 	public Aprendiz fromDTO(AprendizNewDTO objDTO) {
@@ -148,6 +152,6 @@ public class AprendizService {
 		Instituicao trab = instituicaoRep.getOne(objDTO.getIdTrabalho());
 		Instituicao empQual = instituicaoRep.getOne(objDTO.getIdEmpresaQuali());
 		
-		return new Aprendiz(objDTO.getNome(), objDTO.getTelefone(), end, objDTO.getEmail() , objDTO.getCpf(), objDTO.getDataNascimento(), objDTO.getCpfResp(), objDTO.getTelefoneResp(),trab ,escola, empQual, objDTO.getId(), pe.encode(objDTO.getSenha()));
+		return new Aprendiz(objDTO.getNome(), objDTO.getTelefone(), end, objDTO.getEmail() , objDTO.getCpf(), objDTO.getDataNascimento(), objDTO.getCpfResp(), objDTO.getTelefoneResp(),null, objDTO.getId(), pe.encode(objDTO.getSenha()));
 	}
 }

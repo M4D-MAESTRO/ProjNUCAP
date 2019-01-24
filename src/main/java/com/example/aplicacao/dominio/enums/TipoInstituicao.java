@@ -2,7 +2,7 @@ package com.example.aplicacao.dominio.enums;
 
 public enum TipoInstituicao {
 	
-	ESCOLA(1, "Escola"),
+	ESCOLAR(1, "Escola"),
 	QUALIFICADORA(2, "Qualificadora"),
 	LABORAL(3, "Laboral"),
 	FISCALIZADOR(4, "Ficalizadora");

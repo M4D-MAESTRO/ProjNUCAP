@@ -1,6 +1,12 @@
 package com.example.aplicacao.dominio;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.OneToMany;
 
 import com.example.aplicacao.dominio.enums.TipoInstituicao;
 
@@ -11,6 +17,19 @@ public class Instituicao extends Pessoa {
 
 	private String cnpj;
 	private Integer tipo;
+	
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "id.instituicao")
+	private List<InstituicaoAprendiz> aprendizes = new ArrayList<>();
+	
+	
+
+	public List<InstituicaoAprendiz> getAprendizes() {
+		return aprendizes;
+	}
+
+	public void setAprendiz(List<InstituicaoAprendiz> aprendiz) {
+		this.aprendizes = aprendiz;
+	}
 
 	public String getCnpj() {
 		return cnpj;

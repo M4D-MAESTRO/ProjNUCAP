@@ -38,6 +38,10 @@ public class InstituicaoService {
 				"Objeto não encontrado! Id: " + id + ", Tipo: " + Instituicao.class.getName()));
 	}
 	
+	public Long getCount() {
+		return repo.count();
+	}
+	
 	public Instituicao findByType(int tipo) {
 		List<Instituicao> lista = repo.findAll();
 		Instituicao obj = null;
