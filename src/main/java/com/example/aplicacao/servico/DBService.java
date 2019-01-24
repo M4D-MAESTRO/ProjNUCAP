@@ -94,7 +94,7 @@ public class DBService {
 		instituicaoRep.saveAll(Arrays.asList(escola, empresaQuali, empresa));
 		
 		
-		  Aprendiz apr1 = new Aprendiz("Pedro Augusto de Assis", "(21) 9533-33331", end1,"augusto@gmail.com" , "041.251.478-56", data, "011.225.445-55", "(21) 9999-99999", null , 2019100, pe.encode("senha4"));
+		  Aprendiz apr1 = new Aprendiz("Pedro Augusto de Assis", "(21) 9533-33331", end1,"luishccorrea@gmail.com" , "041.251.478-56", data, "011.225.445-55", "(21) 9999-99999", null , 2019100, pe.encode("senha4"));
 
 		  Aprendiz apr2 = new Aprendiz("Wendel Dias Reis", "(21) 9533-33331", end1,"diasreis@gmail.com" , "041.251.478-56", data, "011.225.445-55", "(21) 9999-99999", null , 2019101, pe.encode("senha5"));
 		  aprendizRep.saveAll(Arrays.asList(apr1, apr2));
