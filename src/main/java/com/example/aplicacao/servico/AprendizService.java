@@ -103,6 +103,23 @@ public class AprendizService {
 		
 	}
 	
+	public Aprendiz findByEmail(String email) {
+		UserSS user = UserService.authenticated();
+		
+		if(user == null && !email.equals(user.getUsername())) {
+			throw new AuthorizationException("Acesso negado");
+		}
+		
+		Aprendiz obj = repo.findByEmail(user.getUsername());
+		
+		if(obj == null) {
+			throw new ObjectNotFoundException("Objeto não encontrado! Código de identificação: " + user.getId() + ", Tipo: " + Aprendiz.class.getName());
+		}
+		
+		return obj;
+		
+	}
+	
 	public Page<Aprendiz> findPage(Integer page, Integer linesPerPage, String orderBy, String direction){
 		PageRequest pageRequest = PageRequest.of(page, linesPerPage,Direction.valueOf(direction), orderBy);
 		return repo.findAll(pageRequest);

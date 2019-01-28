@@ -35,11 +35,17 @@ public class AprendizResource {
 		return ResponseEntity.ok().body(obj);
 	}
 	
+	@RequestMapping(value="/email", method=RequestMethod.GET)
+	public ResponseEntity<?> find(@RequestParam(value="value") String email){
+		Aprendiz apr = servico.findByEmail(email);
+		return ResponseEntity.ok().body(apr);
+	}
+	/*
 	@RequestMapping(value="/{nome}", params="aprendizNome", method=RequestMethod.GET)
 	public ResponseEntity<?> find(@RequestParam(value="aprendizNome") String nome) {
 		Aprendiz obj = servico.findByName(nome);
 		return ResponseEntity.ok().body(obj);
-	}
+	}*/
 	
 	@RequestMapping(method=RequestMethod.GET)
 	public ResponseEntity<List<AprendizDTO>> getAll() {
