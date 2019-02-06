@@ -16,6 +16,7 @@ public interface InstituicaoRepository extends JpaRepository<Instituicao, Intege
 	Instituicao findByEmail(String email);
 	
 	Page<Instituicao>  findDistinctByNomeContaining(String nome, Pageable pageRequest);
+	Page<Instituicao>  findDistinctByIdContaining(Integer id, Pageable pageRequest);
 	Page<Instituicao>  findDistinctByTipo(Integer tipo, Pageable pageRequest);
 	
 

@@ -104,6 +104,11 @@ public class InstituicaoService {
 		return repo.findDistinctByNomeContaining(nome,pageRequest);
 	}
 	
+	public Page<Instituicao> findInstituicaoId(Integer page, Integer linesPerPage, String orderBy, String direction, Integer id){
+		PageRequest pageRequest = PageRequest.of(page, linesPerPage,Direction.valueOf(direction), orderBy);
+		return repo.findDistinctByIdContaining(id,pageRequest);
+	}
+	
 	public Page<Instituicao> findInstituicaoByTipo(Integer page, Integer linesPerPage, String orderBy, String direction, Integer tipo){
 		PageRequest pageRequest = PageRequest.of(page, linesPerPage,Direction.valueOf(direction), orderBy);
 		return repo.findDistinctByTipo(tipo,pageRequest);

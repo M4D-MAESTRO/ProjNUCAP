@@ -1,4 +1,4 @@
-package com.example.aplicacao.resources;
+	package com.example.aplicacao.resources;
 
 import java.net.URI;
 import java.util.List;
@@ -17,9 +17,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.example.aplicacao.dominio.Cidade;
 import com.example.aplicacao.dominio.Instituicao;
+import com.example.aplicacao.dto.CidadeDTO;
 import com.example.aplicacao.dto.InstituicaoDTO;
 import com.example.aplicacao.dto.InstituicaoNewDTO;
+import com.example.aplicacao.dto.ListaAprendizesDTO;
 import com.example.aplicacao.servico.InstituicaoService;
 
 @RestController
@@ -33,6 +36,13 @@ public class InstituicaoResource {
 	public ResponseEntity<?> find(@PathVariable Integer id) {
 		Instituicao obj = servico.find(id);
 		return ResponseEntity.ok().body(obj);
+	}
+	
+	@RequestMapping(value = "/{id}/alunos",method = RequestMethod.GET)
+	public ResponseEntity<?> findAlunos(@PathVariable Integer id){
+		Instituicao obj = servico.find(id);
+		ListaAprendizesDTO listaDTO = new ListaAprendizesDTO(obj);
+		return ResponseEntity.ok().body(listaDTO);
 	}
 	
 	/*@RequestMapping(value="/{nome}", method=RequestMethod.GET)
