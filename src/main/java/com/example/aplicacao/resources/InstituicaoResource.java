@@ -42,7 +42,7 @@ public class InstituicaoResource {
 	public ResponseEntity<?> findAlunos(@PathVariable Integer id){
 		Instituicao obj = servico.find(id);
 		ListaAprendizesDTO listaDTO = new ListaAprendizesDTO(obj);
-		return ResponseEntity.ok().body(listaDTO);
+		return ResponseEntity.ok().body(listaDTO.getLista());
 	}
 	
 	/*@RequestMapping(value="/{nome}", method=RequestMethod.GET)
