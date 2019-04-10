@@ -30,7 +30,7 @@ public  class Pessoa implements Serializable{
 	
 	@Id
 	@Column(name="id")
-	//@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String nome;
 	private String telefone;

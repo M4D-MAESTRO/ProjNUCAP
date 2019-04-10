@@ -75,29 +75,39 @@ public class DBService {
 
 
 		Instituicao escola = new Instituicao("Centro Educacional Futuro Certo", "(21) 988554525", end2,
-				"centroedu@gmail.com", "25.561.654/6321-68", TipoInstituicao.ESCOLAR, 2019200,
+				"centroedu@gmail.com", "25.561.654/6321-68", TipoInstituicao.ESCOLAR, null,
 				pe.encode("senha1"));
 		escola.addPerfil(Perfil.ADMIN);
 
 
 		Instituicao empresaQuali = new Instituicao("Fundação Cursos Oliveira", "(21) 2141-5522", end2,
-				"fundaoliveira@gmail.com", "44.775/5522-11", TipoInstituicao.QUALIFICADORA, 2019201,
+				"fundaoliveira@gmail.com", "44.775/5522-11", TipoInstituicao.QUALIFICADORA, null,
 				pe.encode("senha2"));
 		empresaQuali.addPerfil(Perfil.ADMIN);
 	
 
 
 		Instituicao empresa = new Instituicao("Restaurante Sabor Total", "(21) 95663-2541", end2,
-				"sabortotal@gmail.com", "21.252.656/5889-95", TipoInstituicao.LABORAL, 2019202,
+				"sabortotal@gmail.com", "21.252.656/5889-95", TipoInstituicao.LABORAL, null,
 				pe.encode("senha3"));
 		empresa.addPerfil(Perfil.ADMIN);
+		
+		Instituicao gambiarra = new Instituicao("Sem instituição selecionada", "", null,
+				"", "", TipoInstituicao.ESCOLAR, 0,
+				pe.encode("senha1"));
+		gambiarra.addPerfil(Perfil.ADMIN);
+		instituicaoRep.saveAll(Arrays.asList(gambiarra));
+		
 		instituicaoRep.saveAll(Arrays.asList(escola, empresaQuali, empresa));
 		
 		
-		  Aprendiz apr1 = new Aprendiz("Pedro Augusto de Assis", "(21) 9533-33331", end1,"luishccorrea@gmail.com" , "041.251.478-56", data, "011.225.445-55", "(21) 9999-99999", null , 2019100, pe.encode("senha4"));
-
-		  Aprendiz apr2 = new Aprendiz("Wendel Dias Reis", "(21) 9533-33331", end1,"diasreis@gmail.com" , "041.251.478-56", data, "011.225.445-55", "(21) 9999-99999", null , 2019101, pe.encode("senha5"));
+		  Aprendiz apr1 = new Aprendiz("Pedro Augusto de Assis", "(21) 9533-33331", end1,"luishccorrea@gmail.com" , "041.251.478-56", data, "011.225.445-55", "(21) 9999-99999", null , null, pe.encode("senha4"));
+		  apr1.addPerfil(Perfil.ADMIN);
+		  
+		  Aprendiz apr2 = new Aprendiz("Wendel Dias Reis", "(21) 9533-33331", end1,"diasreis@gmail.com" , "041.251.478-56", data, "011.225.445-55", "(21) 9999-99999", null , null, pe.encode("senha5"));
+		  apr2.addPerfil(Perfil.ADMIN);
 		  aprendizRep.saveAll(Arrays.asList(apr1, apr2));
+		  
 		  
 		  InstituicaoAprendiz instApr1 = new InstituicaoAprendiz(apr1, empresa);
 		  InstituicaoAprendiz instApr2 = new InstituicaoAprendiz(apr1, escola);

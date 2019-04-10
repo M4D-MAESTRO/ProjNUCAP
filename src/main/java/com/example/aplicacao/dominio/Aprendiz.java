@@ -28,6 +28,10 @@ public class Aprendiz extends Pessoa {
 
 	private String cpfResp;
 	private String telefoneResp;
+	
+	private Instituicao trabalho;
+	private Instituicao escola;
+	private Instituicao empresaQuali;
  
 	/*
 	 * //@OneToOne(cascade = {CascadeType.ALL})
@@ -49,6 +53,36 @@ public class Aprendiz extends Pessoa {
 
 	public void setInstituicoes(List<InstituicaoAprendiz> instituicoes) {
 		this.instituicoes = instituicoes;
+		trabalho = this.instituicoes.get(0).getId().getInstituicao();
+		escola = this.instituicoes.get(1).getId().getInstituicao();
+		empresaQuali = this.instituicoes.get(2).getId().getInstituicao();
+		
+	}
+	
+	
+
+	public Instituicao getTrabalho() {
+		return trabalho;
+	}
+
+	public void setTrabalho(Instituicao trabalho) {
+		this.trabalho = trabalho;
+	}
+
+	public Instituicao getEscola() {
+		return escola;
+	}
+
+	public void setEscola(Instituicao escola) {
+		this.escola = escola;
+	}
+
+	public Instituicao getEmpresaQuali() {
+		return empresaQuali;
+	}
+
+	public void setEmpresaQuali(Instituicao empresaQuali) {
+		this.empresaQuali = empresaQuali;
 	}
 
 	public String getCpf() {

@@ -1,5 +1,6 @@
 package com.example.aplicacao.dominio;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -17,7 +18,7 @@ public class Endereco {
 	private String complemento;
 	private String bairro;
 	
-	@ManyToOne
+	@ManyToOne(cascade = {CascadeType.PERSIST})
 	@JoinColumn(name="cidade_id")
 	private Cidade cidade;
 	
