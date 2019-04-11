@@ -29,9 +29,9 @@ public class Aprendiz extends Pessoa {
 	private String cpfResp;
 	private String telefoneResp;
 	
-	private Instituicao trabalho;
-	private Instituicao escola;
-	private Instituicao empresaQuali;
+	//private Instituicao trabalho;
+	//private Instituicao escola;
+	//private Instituicao empresaQuali;
  
 	/*
 	 * //@OneToOne(cascade = {CascadeType.ALL})
@@ -43,7 +43,7 @@ public class Aprendiz extends Pessoa {
 	 * @OneToMany(mappedBy = "instituicao") private Instituicao empresaQuali;
 	 */
 
-	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "id.aprendiz")
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.MERGE, mappedBy = "id.aprendiz")
 	private List<InstituicaoAprendiz> instituicoes = new ArrayList<>();
 
 	
@@ -53,14 +53,14 @@ public class Aprendiz extends Pessoa {
 
 	public void setInstituicoes(List<InstituicaoAprendiz> instituicoes) {
 		this.instituicoes = instituicoes;
-		trabalho = this.instituicoes.get(0).getId().getInstituicao();
+		/*trabalho = this.instituicoes.get(0).getId().getInstituicao();
 		escola = this.instituicoes.get(1).getId().getInstituicao();
-		empresaQuali = this.instituicoes.get(2).getId().getInstituicao();
+		empresaQuali = this.instituicoes.get(2).getId().getInstituicao();*/
 		
 	}
 	
 	
-
+/*
 	public Instituicao getTrabalho() {
 		return trabalho;
 	}
@@ -83,7 +83,7 @@ public class Aprendiz extends Pessoa {
 
 	public void setEmpresaQuali(Instituicao empresaQuali) {
 		this.empresaQuali = empresaQuali;
-	}
+	}*/
 
 	public String getCpf() {
 		return cpf;

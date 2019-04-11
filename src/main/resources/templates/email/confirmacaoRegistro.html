@@ -7,7 +7,6 @@
 <body>
 	<div>
 		<h1>
-			Código de identificação: <span th:text="${aprendiz.id}"> </span>
 		</h1>
 
 		<p>
@@ -16,10 +15,7 @@
 			Email: <span th:text="${aprendiz.email}"></span> <br>
 			CPF: <span th:text="${aprendiz.cpf}"></span>, data de nascimento <span th:text="${#temporals.format(aprendiz.dataNascimento, 'dd/MM/yyyy')}"></span> <br>
 		    CPF do Responsável: <span th:text="${aprendiz.cpfResp}"></span>, telefone do responsável <span th:text="${aprendiz.telefoneResp}"></span> <br><br>
-		    Endereco: <span th:text="${aprendiz.endereco.endereco}"></span> 
-		    <span th:text="${aprendiz.endereco.complemento}"></span> - 
-		    <span th:text="${aprendiz.endereco.bairro}"></span>, 
-		    <span th:text="${aprendiz.endereco.cidade.nome}"></span> - 
+		    
 		    	 <br>
 			
 		</p>

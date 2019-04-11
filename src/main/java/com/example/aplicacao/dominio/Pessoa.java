@@ -88,7 +88,7 @@ public  class Pessoa implements Serializable{
 		super();
 		this.nome = nome;
 		this.telefone = telefone;
-		this.endereco = endereco;
+		//this.endereco = endereco;
 		this.email = email;
 		this.id = id;
 		this.senha = senha;

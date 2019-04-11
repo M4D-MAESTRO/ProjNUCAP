@@ -18,7 +18,7 @@ public class Instituicao extends Pessoa {
 	private String cnpj;
 	private Integer tipo;
 	
-	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "id.instituicao")
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.MERGE, mappedBy = "id.instituicao")
 	private List<InstituicaoAprendiz> aprendizes = new ArrayList<>();
 	
 	

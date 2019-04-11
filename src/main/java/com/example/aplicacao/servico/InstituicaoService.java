@@ -127,9 +127,10 @@ public class InstituicaoService {
 	}
 	
 	public Instituicao fromDTO(InstituicaoNewDTO objDTO) {
+		Instituicao inst = new Instituicao(objDTO.getNome(), objDTO.getTelefone(), null, objDTO.getEmail() , objDTO.getCnpj(), TipoInstituicao.toEnum(objDTO.getTipo()), objDTO.getId(), pe.encode(objDTO.getSenha()));
 		Cidade ci = new Cidade(objDTO.getIdCidade(), null, null);
-		Endereco end = new Endereco(objDTO.getEndereco(), objDTO.getComplemento(), objDTO.getBairro(), ci, null);
-		return new Instituicao(objDTO.getNome(), objDTO.getTelefone(), end, objDTO.getEmail() , objDTO.getCnpj(), TipoInstituicao.toEnum(objDTO.getTipo()), objDTO.getId(), pe.encode(objDTO.getSenha()));
+		Endereco end = new Endereco(objDTO.getEndereco(), objDTO.getComplemento(), objDTO.getBairro(), ci, null, inst);
+		return inst;
 	}
 	
 	

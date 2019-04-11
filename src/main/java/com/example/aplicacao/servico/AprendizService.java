@@ -1,6 +1,7 @@
 package com.example.aplicacao.servico;
 
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,6 +18,7 @@ import com.example.aplicacao.dominio.Aprendiz;
 import com.example.aplicacao.dominio.Cidade;
 import com.example.aplicacao.dominio.Endereco;
 import com.example.aplicacao.dominio.Instituicao;
+import com.example.aplicacao.dominio.InstituicaoAprendiz;
 import com.example.aplicacao.dto.AprendizDTO;
 import com.example.aplicacao.dto.AprendizNewDTO;
 import com.example.aplicacao.repositories.AprendizRepository;
@@ -158,8 +160,9 @@ public class AprendizService {
 	}
 	
 	public Aprendiz fromDTO(AprendizNewDTO objDTO) {
+		Aprendiz apr = new Aprendiz(objDTO.getNome(), objDTO.getTelefone(), null, objDTO.getEmail() , objDTO.getCpf(), objDTO.getDataNascimento(), objDTO.getCpfResp(), objDTO.getTelefoneResp(),null, objDTO.getId(), pe.encode(objDTO.getSenha()));
 		Cidade ci = new Cidade(objDTO.getIdCidade(), null, null);
-		Endereco end = new Endereco(objDTO.getEndereco(), objDTO.getComplemento(), objDTO.getBairro(), ci, null);
+		Endereco end = new Endereco(objDTO.getEndereco(), objDTO.getComplemento(), objDTO.getBairro(), ci,null, apr);
 		
 		/*Instituicao escola = new Instituicao(null, null, null , null ,null ,  objDTO.getIdEscola());
 		Instituicao trab = new Instituicao(null, null, null , null ,null ,  objDTO.getIdTrabalho());
@@ -168,7 +171,8 @@ public class AprendizService {
 		Instituicao escola = instituicaoRep.getOne(objDTO.getIdEscola());
 		Instituicao trab = instituicaoRep.getOne(objDTO.getIdTrabalho());
 		Instituicao empQual = instituicaoRep.getOne(objDTO.getIdEmpresaQuali());
+		apr.setInstituicoes(Arrays.asList(new InstituicaoAprendiz(apr, escola), new InstituicaoAprendiz(apr, trab), new InstituicaoAprendiz(apr, empQual)));
 		
-		return new Aprendiz(objDTO.getNome(), objDTO.getTelefone(), end, objDTO.getEmail() , objDTO.getCpf(), objDTO.getDataNascimento(), objDTO.getCpfResp(), objDTO.getTelefoneResp(),null, objDTO.getId(), pe.encode(objDTO.getSenha()));
+		return apr;
 	}
 }
