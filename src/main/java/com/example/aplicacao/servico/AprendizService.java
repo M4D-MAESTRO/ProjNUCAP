@@ -17,11 +17,15 @@ import org.springframework.stereotype.Service;
 import com.example.aplicacao.dominio.Aprendiz;
 import com.example.aplicacao.dominio.Cidade;
 import com.example.aplicacao.dominio.Endereco;
+import com.example.aplicacao.dominio.Estado;
 import com.example.aplicacao.dominio.Instituicao;
 import com.example.aplicacao.dominio.InstituicaoAprendiz;
 import com.example.aplicacao.dto.AprendizDTO;
 import com.example.aplicacao.dto.AprendizNewDTO;
 import com.example.aplicacao.repositories.AprendizRepository;
+import com.example.aplicacao.repositories.CidadeRepository;
+import com.example.aplicacao.repositories.EnderecoRepository;
+import com.example.aplicacao.repositories.EstadoRepository;
 import com.example.aplicacao.repositories.InstituicaoRepository;
 import com.example.aplicacao.security.UserSS;
 import com.example.aplicacao.servico.exception.AuthorizationException;
@@ -43,13 +47,23 @@ public class AprendizService {
 	@Autowired
 	private EmailService emailService;
 	
+	@Autowired
+	private EnderecoRepository endRepo;
+	
+	@Autowired
+	private CidadeRepository cidaRepo;
+	
+	@Autowired
+	private EstadoRepository estRepo;
+	
 	public Aprendiz find(Integer id) {
-		UserSS user = UserService.authenticated();
 		
+		/*UserSS user = UserService.authenticated();
+		System.out.println("Meu user no find: " + user);
 		if(user == null || !id.equals(user.getId())) {
 			throw new AuthorizationException("Acesso negado!");
 			
-		}
+		}*/
 		
 		Optional<Aprendiz> obj = repo.findById(id);
 		//System.out.println(obj);
@@ -67,6 +81,7 @@ public class AprendizService {
 	}
 	
 	public Aprendiz insert(Aprendiz obj) {
+		endRepo.saveAndFlush(obj.getEndereco());
 		obj = repo.save(obj);
 		//System.out.println(obj);
 		emailService.sendRegistrationHtmlEmail(obj);
@@ -106,16 +121,17 @@ public class AprendizService {
 	}
 	
 	public Aprendiz findByEmail(String email) {
-		UserSS user = UserService.authenticated();
+		/*UserSS user = UserService.authenticated();
+		System.out.println("Meu user no findByEmail: " + user);
 		
 		if(user == null && !email.equals(user.getUsername())) {
 			throw new AuthorizationException("Acesso negado");
-		}
-		
-		Aprendiz obj = repo.findByEmail(user.getUsername());
-		
+		}*/
+		System.out.println("Email: " + email);
+		Aprendiz obj = repo.findByEmail(email);
+		//System.out.println("Meu aprendiz: " + obj);
 		if(obj == null) {
-			throw new ObjectNotFoundException("Objeto não encontrado! Código de identificação: " + user.getId() + ", Tipo: " + Aprendiz.class.getName());
+			throw new ObjectNotFoundException("Objeto não encontrado! Código de identificação: " /*+ user.getId()*/ + ", Tipo: " + Aprendiz.class.getName());
 		}
 		
 		return obj;
@@ -161,8 +177,13 @@ public class AprendizService {
 	
 	public Aprendiz fromDTO(AprendizNewDTO objDTO) {
 		Aprendiz apr = new Aprendiz(objDTO.getNome(), objDTO.getTelefone(), null, objDTO.getEmail() , objDTO.getCpf(), objDTO.getDataNascimento(), objDTO.getCpfResp(), objDTO.getTelefoneResp(),null, objDTO.getId(), pe.encode(objDTO.getSenha()));
-		Cidade ci = new Cidade(objDTO.getIdCidade(), null, null);
+		Estado es = new Estado(objDTO.getIdEstado(), null);
+		Cidade ci = new Cidade(objDTO.getIdCidade(), null, es);
+		System.out.println("Estado: " + objDTO.getIdEstado() + " Cidade: " + objDTO.getIdCidade());
+		es = estRepo.getOne(objDTO.getIdEstado());
+		ci = cidaRepo.getOne(objDTO.getIdCidade());
 		Endereco end = new Endereco(objDTO.getEndereco(), objDTO.getComplemento(), objDTO.getBairro(), ci,null, apr);
+		
 		
 		/*Instituicao escola = new Instituicao(null, null, null , null ,null ,  objDTO.getIdEscola());
 		Instituicao trab = new Instituicao(null, null, null , null ,null ,  objDTO.getIdTrabalho());
@@ -171,6 +192,7 @@ public class AprendizService {
 		Instituicao escola = instituicaoRep.getOne(objDTO.getIdEscola());
 		Instituicao trab = instituicaoRep.getOne(objDTO.getIdTrabalho());
 		Instituicao empQual = instituicaoRep.getOne(objDTO.getIdEmpresaQuali());
+		apr.setEndereco(end);/*tirar aqui*/
 		apr.setInstituicoes(Arrays.asList(new InstituicaoAprendiz(apr, escola), new InstituicaoAprendiz(apr, trab), new InstituicaoAprendiz(apr, empQual)));
 		
 		return apr;

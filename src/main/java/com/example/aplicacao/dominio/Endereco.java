@@ -9,6 +9,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Endereco {
 	
@@ -19,7 +21,7 @@ public class Endereco {
 	private String complemento;
 	private String bairro;
 	
-	@ManyToOne
+	@ManyToOne(cascade = {CascadeType.ALL})
 	@JoinColumn(name="cidade_id")
 	private Cidade cidade;
 	
@@ -29,7 +31,9 @@ public class Endereco {
 	public void setPessoa(Pessoa pessoa) {
 		this.pessoa = pessoa;
 	}
-	@OneToOne
+	
+	@JsonIgnore
+	@OneToOne(cascade = {CascadeType.ALL})
 	@JoinColumn(name="pessoa_id")
 	private Pessoa pessoa;
 	

@@ -1,4 +1,4 @@
-	package com.example.aplicacao.resources;
+package com.example.aplicacao.resources;
 
 import java.net.URI;
 import java.util.List;
@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.example.aplicacao.dominio.Aprendiz;
 import com.example.aplicacao.dominio.Cidade;
 import com.example.aplicacao.dominio.Instituicao;
 import com.example.aplicacao.dto.CidadeDTO;
@@ -43,6 +44,12 @@ public class InstituicaoResource {
 		Instituicao obj = servico.find(id);
 		ListaAprendizesDTO listaDTO = new ListaAprendizesDTO(obj);
 		return ResponseEntity.ok().body(listaDTO.getLista());
+	}
+	
+	@RequestMapping(value="/email", method=RequestMethod.GET)
+	public ResponseEntity<?> find(@RequestParam(value="value") String email){
+		Instituicao apr = servico.findByEmail(email);
+		return ResponseEntity.ok().body(apr);
 	}
 	
 	/*@RequestMapping(value="/{nome}", method=RequestMethod.GET)

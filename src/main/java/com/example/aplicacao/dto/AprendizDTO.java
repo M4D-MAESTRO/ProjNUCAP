@@ -35,6 +35,8 @@ public class AprendizDTO implements Serializable{
 	private LocalDate dataNascimento;
 	
 	
+	
+	
 	public AprendizDTO() {
 		
 	}

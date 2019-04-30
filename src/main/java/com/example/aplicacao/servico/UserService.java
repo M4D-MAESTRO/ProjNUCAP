@@ -11,7 +11,8 @@ public class UserService {
 
 		try {
 			
-			UserSS principal = (UserSS)SecurityContextHolder.getContext().getAuthentication().getPrincipal();			
+			UserSS principal = (UserSS)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+			System.out.println("Meu USER na autenticação: " + principal);
 			return principal;
 			
 		} catch (Exception e) {

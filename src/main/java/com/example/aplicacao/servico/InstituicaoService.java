@@ -133,6 +133,24 @@ public class InstituicaoService {
 		return inst;
 	}
 	
+	public Instituicao findByEmail(String email) {
+		/*UserSS user = UserService.authenticated();
+		System.out.println("Meu user no findByEmail: " + user);
+		
+		if(user == null && !email.equals(user.getUsername())) {
+			throw new AuthorizationException("Acesso negado");
+		}*/
+		System.out.println("Email: " + email);
+		Instituicao obj = repo.findByEmail(email);
+		//System.out.println("Meu aprendiz: " + obj);
+		if(obj == null) {
+			throw new ObjectNotFoundException("Objeto não encontrado! Código de identificação: " /*+ user.getId()*/ + ", Tipo: " + Aprendiz.class.getName());
+		}
+		
+		return obj;
+		
+	}
+	
 	
 	
 	

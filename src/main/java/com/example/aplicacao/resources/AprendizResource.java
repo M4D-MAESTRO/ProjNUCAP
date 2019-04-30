@@ -17,8 +17,11 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.example.aplicacao.dominio.Aprendiz;
+import com.example.aplicacao.dominio.Instituicao;
 import com.example.aplicacao.dto.AprendizDTO;
 import com.example.aplicacao.dto.AprendizNewDTO;
+import com.example.aplicacao.dto.ListaAprendizesDTO;
+import com.example.aplicacao.dto.ListaInstituicoesDTO;
 import com.example.aplicacao.resources.utils.URL;
 import com.example.aplicacao.servico.AprendizService;
 
@@ -33,6 +36,13 @@ public class AprendizResource {
 	public ResponseEntity<?> find(@PathVariable Integer id) {
 		Aprendiz obj = servico.find(id);
 		return ResponseEntity.ok().body(obj);
+	}
+	
+	@RequestMapping(value = "/{id}/instituicoes",method = RequestMethod.GET)
+	public ResponseEntity<?> findAlunos(@PathVariable Integer id){
+		Aprendiz obj = servico.find(id);
+		ListaInstituicoesDTO listaDTO = new ListaInstituicoesDTO(obj);
+		return ResponseEntity.ok().body(listaDTO.getLista());
 	}
 	
 	@RequestMapping(value="/email", method=RequestMethod.GET)
