@@ -66,6 +66,16 @@ public class InstituicaoAprendizPK implements Serializable{
 			return false;
 		return true;
 	}
+
+	public InstituicaoAprendizPK() {
+		super();
+	}
+
+	public InstituicaoAprendizPK(Aprendiz aprendiz, Instituicao instituicao) {
+		super();
+		this.aprendiz = aprendiz;
+		this.instituicao = instituicao;
+	}
  	
 	
  	
