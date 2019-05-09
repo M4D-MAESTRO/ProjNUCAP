@@ -41,7 +41,7 @@ public class AprendizInstituicaoResource {
 	@RequestMapping(method=RequestMethod.POST)
 	public ResponseEntity<Void> insert(@Valid @RequestBody AtualizarAssocDTO objDTO){
 		InstituicaoAprendiz obj = servico.fromDTO(objDTO);
-		obj = servico.insert(obj)
+		obj = servico.insert(obj);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
 		return ResponseEntity.created(uri).build();
 	}
