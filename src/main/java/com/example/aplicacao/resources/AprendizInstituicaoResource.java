@@ -29,8 +29,7 @@ public class AprendizInstituicaoResource {
 	@Autowired
 	AprendizInstituicaoService servico;
 	
-	
-	
+
 	@RequestMapping(value="/att", method=RequestMethod.PUT)
 	public ResponseEntity<Void> update(@Valid @RequestBody AtualizarAssocDTO objDTO){
 		InstituicaoAprendiz obj = servico.fromDTO(objDTO);	

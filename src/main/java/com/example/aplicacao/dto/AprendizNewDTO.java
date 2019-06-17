@@ -8,6 +8,9 @@ import javax.validation.constraints.NotEmpty;
 
 import org.hibernate.validator.constraints.br.CPF;
 
+import com.example.aplicacao.servico.validation.PessoaInsert;
+
+@PessoaInsert
 public class AprendizNewDTO implements Serializable{
 
 	private static final long serialVersionUID = 1L;

@@ -41,7 +41,8 @@ public class AprendizInstituicaoService {
 	}
 
 	public InstituicaoAprendiz update(InstituicaoAprendiz obj) {
-		repo.findById(obj.getId().getAprendiz().getId());
+		//repo.findById(obj.getId().getAprendiz().getId());
+		repo.findByIdAndId(obj.getId().getAprendiz().getId(), obj.getId().getInstituicao().getId());
 		InstituicaoAprendiz newObj = repo.findByIdAndId(obj.getId().getAprendiz().getId(), obj.getId().getInstituicao().getId());
 		updateData(newObj, obj);
 		return repo.save(newObj);
@@ -56,6 +57,9 @@ public class AprendizInstituicaoService {
 	public InstituicaoAprendiz fromDTO(@Valid AtualizarAssocDTO objDTO) {
 		InstituicaoAprendiz obj = new InstituicaoAprendiz();
 		obj.setId(new InstituicaoAprendizPK(aprendiz.getOne(objDTO.getIdAprendiz()), instituicao.getOne(objDTO.getIdInstituicao())));
+		obj.setPercentualDeFalta(objDTO.getPercentualFalta());
+		obj.setDataDeInicio(objDTO.getDataInicio());
+		obj.setDataDeTermino(objDTO.getDataTermino());
 		
 		return obj;
 	}

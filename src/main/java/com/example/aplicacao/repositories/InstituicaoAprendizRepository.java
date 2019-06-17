@@ -14,7 +14,6 @@ import com.example.aplicacao.dominio.InstituicaoAprendiz;
 @Repository
 public interface InstituicaoAprendizRepository extends JpaRepository<InstituicaoAprendiz, Integer>{
 	
-	
 	InstituicaoAprendiz findByIdAndId(Integer idAprenidz,Integer idInstituicao);
 	
 

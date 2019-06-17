@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title th:remove="all">Confirmação de Registro</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+	<div>
+		<h1>
+		</h1>
+
+		<p>
+			<b>Aprendiz:</b> <span th:text="${aprendiz.nome}"></span> <br>
+			<br> Telefone:<span th:text="${aprendiz.telefone}"></span> <br>
+			Email: <span th:text="${aprendiz.email}"></span> <br>
+			CPF: <span th:text="${aprendiz.cpf}"></span>, data de nascimento <span th:text="${#temporals.format(aprendiz.dataNascimento, 'dd/MM/yyyy')}"></span> <br>
+		    CPF do Responsável: <span th:text="${aprendiz.cpfResp}"></span>, telefone do responsável <span th:text="${aprendiz.telefoneResp}"></span> <br><br>
+		    
+		    	 <br>
+			
+		</p>
+
+	</div>
+</body>
+</html>
