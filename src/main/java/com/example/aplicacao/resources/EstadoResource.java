@@ -40,6 +40,7 @@ public class EstadoResource {
 	public ResponseEntity<?> findCidades(@PathVariable Integer estadoId){
 		List<Cidade> cidades = serviceCidade.findByEstado(estadoId);
 		List<CidadeDTO> cidadesDTO = cidades.stream().map(obj -> new CidadeDTO(obj)).collect(Collectors.toList());
+		cidadesDTO.stream().forEach(cidade -> System.out.println(cidade.getId() + " - " + cidade.getNome()));
 		return ResponseEntity.ok().body(cidadesDTO);
 	}
 

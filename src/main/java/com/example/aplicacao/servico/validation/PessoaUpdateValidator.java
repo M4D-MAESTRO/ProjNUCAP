@@ -13,20 +13,20 @@ import com.example.aplicacao.dto.AprendizNewDTO;
 import com.example.aplicacao.repositories.AprendizRepository;
 import com.example.aplicacao.resources.exceptions.FieldMessage;
 
-public class PessoaInsertValidator implements ConstraintValidator<PessoaInsert, AprendizNewDTO> {
+public class PessoaUpdateValidator implements ConstraintValidator<PessoaUpdate, AprendizNewDTO> {
 
 	@Autowired
 	private AprendizRepository repo;
 	
 	@Override
-	public void initialize(PessoaInsert ann) {
+	public void initialize(PessoaUpdate ann) {
 	}
 
 	@Override
 	public boolean isValid(AprendizNewDTO objDto, ConstraintValidatorContext context) {
 		
 		List<FieldMessage> list = new ArrayList<>();
-		System.out.println(objDto.getEmail());
+
 		Aprendiz aux = repo.findByEmail(objDto.getEmail());
 		if (aux != null) {
 			list.add(new FieldMessage("email", "Email já existente"));

@@ -23,6 +23,15 @@ public class CidadeDTO implements Serializable{
 		
 	}
 	
+	
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
 	public CidadeDTO(Cidade obj) {
 		id = obj.getId();
 		nome = obj.getNome();
